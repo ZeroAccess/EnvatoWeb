@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Lesson 8</title>
+	<!-- Effects and Structure -->
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<article>
+	<h1>My Awesome Post</h1>
+	<p>
+		Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+	</p>
+
+	<p>
+		Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+	</p>
+	
+</article>
+<div id="contact">
+	<h2>Contact Me</h2>
+	<form action="#">
+		<ul>
+			<li>
+				<label for="email">Email Address: </label>
+				<input name="email" id="email">
+			</li>
+			</li>
+				<label for="comments">What's Up?</label>
+				<textarea name="comments" id="comments" cols="30" rows="10"></textarea>
+			</li>
+			<li>
+				<input type="submit" value="Submit">
+			</li>
+		</ul>
+	</form>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+	<script>
+	(function () {
+		$('html').addClass('js');
+
+		var contactForm = {
+			container: $('#contact'),
+
+			config: {
+				effect: 'slideToggle',
+				speed: 500
+			},
+			
+			init: function(config) {
+				$.extend(this.config, config);
+
+				$('<button></button>', {
+					text: 'Contact Me'
+				})
+				.insertAfter('article:first')
+				.on('click', this.show)
+			},
+
+			show: function() {
+				var cf = contactForm,
+					container = cf.container,
+					config = cf.config;
+
+				if (container.is(':hidden')) {
+				contactForm.close.call(container);
+				container[config.effect](config.speed);
+				}
+			},
+
+			close:function(){
+				//this = #contact div
+				var $this = $(this); // still #contact div
+				
+				if ($this.find('span.close').length) return;
+
+				$('<span class=close>X</span>')
+				.prependTo(this)
+				.on('click', function () {
+					//this = span
+					$this[contactForm.config.effect](contactForm.config.speed);
+				})
+			}
+		};
+
+	contactForm.init({
+		effect: 'fadeToggle',
+		speed: 300
+	});
+
+	})();
+	</script>
+
+</body>
+</html>
